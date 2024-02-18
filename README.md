@@ -13,7 +13,7 @@ Healthiator provides patients with a comprehensive overview of medical procedure
 This allows patients to choose the most cost-effective treatment and understand the medical expenses they are facing. A second feature healthiator provides is that once patients receive their actual hospital bill they can claim inaccuracies. Healthiator helps patients with billing disputes by leveraging AI to handle the process of negotiating fair pricing. 
 
 ## How we built it
-We used a combination of Together.AI and Fetch.AI. We have several smart agents running in Fetch.AI each responsible for one of the features. For instance, we get the online and instant data from the hospitals (publicly available under the Good Faith act/law) about the prices and cash discounts using one agent and then use together.ai's API to integrate those information in the negotiation part.
+We used a combination of together.ai and convex. We build the frontend (React/JS) on the basis of the demo project that we did during the convex workshop. In the app, we ask the user to input their medical condition and request information on the user's input to the endpoint that we set up through together.api. As a next step, we want to set-up a database and take the medical costs directly from the files published by hospitals. 
 
 ## Challenges we ran into
 Finding actionable data from the hospitals was one of the most challenging parts as each hospital has their own format and assumptions and it was not straightforward at all how to integrate them all into a single database. Another challenge was making various APIs and third parties work together in time.
