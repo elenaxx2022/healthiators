@@ -7,92 +7,63 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
 function App() {
-  const [newIdea, setNewIdea] = useState("");
+  const [medicaldescription, setMedDes] = useState("");
   const [includeRandom, setIncludeRandom] = useState(true);
 
-  const ideas = useQuery(api.myFunctions.listIdeas);
-  const saveIdea = useMutation(api.myFunctions.saveIdea);
-  const generateIdea = useAction(api.myFunctions.fetchRandomIdea);
+  const procedures = useQuery(api.myFunctions.listProcedures);
+  const saveIdea = useMutation(api.myFunctions.setMedDes);
+  const fetchHealthInfo = useAction(api.myFunctions.fetchHealthInfo);
 
   return (
     <>
       <main className="container max-w-2xl flex flex-col gap-8">
         <h1 className="text-3xl font-extrabold mt-8 text-center">
-          Get hacking with Convex
+          Get A Transparent Bill
         </h1>
 
-        <h2 className="text-center">Let's brainstorm apps to build!</h2>
+        <h2 className="text-center">Please describe your medical problem</h2>
 
         <form className="flex gap-2">
           <Input
             type="text"
-            value={newIdea}
-            onChange={(event) => setNewIdea(event.target.value)}
-            placeholder="Type your app idea here"
+            value={medicaldescription}
+            onChange={(event) => setMedDes(event.target.value)}
+            placeholder="Type medical condition here"
           />
           <Button
             type="submit"
-            disabled={!newIdea}
+            disabled={!medicaldescription}
             title={
-              newIdea
-                ? "Save your idea to the database"
-                : "You must enter an idea first"
+              medicaldescription
+                ? "Get cost overview"
+                : "You must enter your medical issue first"
             }
             onClick={async (e) => {
               e.preventDefault();
-              await saveIdea({ idea: newIdea.trim(), random: false });
-              setNewIdea("");
+              await fetchHealthInfo({
+                healthinfo: medicaldescription.trim(),
+                random: false,
+              });
+              setMedDes("");
             }}
             className="min-w-fit"
           >
-            Save idea
+            Get Cost Overview
           </Button>
         </form>
 
-        <div className="flex justify-between items-center">
-          <Button
-            onClick={async () => {
-              await generateIdea();
-            }}
-            title="Save a randomly generated app idea to the database"
-          >
-            Generate a random app idea
-          </Button>
-
-          <div
-            className="flex gap-2"
-            title="Uh oh, this checkbox doesn't work! Until we fix it ;)"
-          >
-            <Checkbox
-              id="show-random"
-              checked={includeRandom}
-              onCheckedChange={() => setIncludeRandom(!includeRandom)}
-            />
-            <Label htmlFor="show-random">Include random ideas</Label>
-          </div>
-        </div>
-
         <ul>
-          {ideas?.map((document, i) => (
+          {procedures?.map((document, i) => (
             <li key={i}>
-              {document.random ? "🤖 " : "💡 "}
-              {document.idea}
+              {document.random ? "🤖 " : "🤖"}
+              {document.Name}, CPT: {document.CPT}
             </li>
           ))}
         </ul>
       </main>
       <footer className="text-center text-xs mb-5 mt-10 w-full">
         <p>
-          Built with <a href="https://convex.dev">Convex</a>,{" "}
-          <a href="https://www.typescriptlang.org">TypeScript</a>,{" "}
-          <a href="https://react.dev">React</a>, and{" "}
-          <a href="https://vitejs.dev">Vite</a>
-        </p>
-        <p>
-          Random app ideas thanks to{" "}
-          <a target="_blank" href="https://appideagenerator.com/">
-            appideagenerator.com
-          </a>
+          Built for <a href="https://live.treehacks.com/">TreeHacks2024</a>
         </p>
       </footer>
     </>
