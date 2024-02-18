@@ -15,9 +15,6 @@ This allows patients to choose the most cost-effective treatment and understand 
 ## How we built it
 We used a combination of Together.AI and Fetch.AI. We have several smart agents running in Fetch.AI each responsible for one of the features. For instance, we get the online and instant data from the hospitals (publicly available under the Good Faith act/law) about the prices and cash discounts using one agent and then use together.ai's API to integrate those information in the negotiation part.
 
-## Ethics
-The ethics of the project was by far the most important and challenging part. The reason is that although our end purpose is to help people keep healthier by reducing the fear of surprise bills and actually making healthcare more affordable, we are aware that any wrong suggestions or otherwise violations of the user's privacy have significant consequences. Giving the user as much information as possible while keeping away from making clinical suggestions and false/hallucinated information was the most challenging part in our work.
-
 ## Challenges we ran into
 Finding actionable data from the hospitals was one of the most challenging parts as each hospital has their own format and assumptions and it was not straightforward at all how to integrate them all into a single database. Another challenge was making various APIs and third parties work together in time.
 
